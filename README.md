@@ -1,5 +1,5 @@
 # overflow
-Check for int/int64/int32 arithmetic overflow in Golang
+Check for int/int64/int32 integer overflow in Golang arithmetic.
 ### Install
 ```
 go get github.com/JohnCGriffin/overflow
