@@ -42,3 +42,15 @@ yields the output
 For int, int64, and int32 types, provide Add, Add32, Add64, Sub, Sub32, Sub64, etc.  
 Unsigned types not covered at the moment, but such additions are welcome.
 
+### Stay calm and panic
+
+There's a good case to be made that a panic is an unidiomatic but proper response.  Iff you
+believe that there's no valid way to continue your program after math goes wayward, you can
+use the easier Addp, Mulp, Subp, and Divp versions which return the normal result or panic.
+
+
+
+
+
+
+
