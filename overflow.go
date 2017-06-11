@@ -211,3 +211,37 @@ func Quotient(a, b int) (int, int, bool) {
 	q32, r32, ok := Quotient32(int32(a), int32(b))
 	return int(q32), int(r32), ok
 }
+
+/************* Panic versions for int ****************/
+
+func Addp(a, b int) int {
+	r, ok := Add(a, b)
+	if !ok {
+		panic("addition overflow")
+	}
+	return r
+}
+
+func Subp(a, b int) int {
+	r, ok := Sub(a, b)
+	if !ok {
+		panic("subtraction overflow")
+	}
+	return r
+}
+
+func Mulp(a, b int) int {
+	r, ok := Mul(a, b)
+	if !ok {
+		panic("multiplication overflow")
+	}
+	return r
+}
+
+func Divp(a, b int) int {
+	r, ok := Div(a, b)
+	if !ok {
+		panic("division failure")
+	}
+	return r
+}

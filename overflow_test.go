@@ -218,6 +218,46 @@ func TestOperationsInt(t *testing.T) {
 
 		}
 	}
+
+	// Now check panic versions
+	for _, entry := range table {
+		var f func(int, int) int
+		switch entry.f {
+		case "+":
+			f = Addp
+		case "-":
+			f = Subp
+		case "*":
+			f = Mulp
+		case "/":
+			f = Divp
+		}
+
+		result, ok := func() (answer int, ok bool) {
+			ok = true
+			defer func() {
+				if r := recover(); r != nil {
+					answer = 0
+					ok = false
+				}
+			}()
+			//fmt.Printf("%v %v %v\n", entry.f, entry.a, entry.b)
+			answer = f(entry.a, entry.b)
+			return
+		}()
+
+		if result != entry.result || ok != entry.ok {
+			t.Errorf("(%v %v %v) -> (%v, %v), expected (%v, %v)",
+				symbolicName(entry.a),
+				entry.f,
+				symbolicName(entry.b),
+				result, ok,
+				symbolicName(entry.result),
+				entry.ok)
+
+		}
+	}
+
 }
 
 func TestQuotient(t *testing.T) {
@@ -230,12 +270,12 @@ func TestQuotient(t *testing.T) {
 	}
 }
 
-func TestAdditionInt(t *testing.T) {
-	fmt.Printf("maxint32 = %v\n", math.MaxInt32)
-	fmt.Printf("minint32 = %v\n", math.MinInt32)
-	fmt.Printf("maxint64 = %v\n", math.MaxInt64)
-	fmt.Printf("minint64 = %v\n", math.MinInt64)
-}
+//func TestAdditionInt(t *testing.T) {
+//	fmt.Printf("maxint32 = %v\n", math.MaxInt32)
+//	fmt.Printf("minint32 = %v\n", math.MinInt32)
+//	fmt.Printf("maxint64 = %v\n", math.MaxInt64)
+//	fmt.Printf("minint64 = %v\n", math.MinInt64)
+//}
 
 func Test64(t *testing.T) {
 	fmt.Println("64bit:", _is64Bit())
