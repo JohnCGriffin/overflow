@@ -6,6 +6,149 @@ import (
 )
 import "fmt"
 
+// sample all possibilities of 8 bit numbers
+// by checking against 64 bit numbers
+
+func TestAlgorithms(t *testing.T) {
+
+	add8 := func(a, b int8) (int8, bool) {
+		c := a + b
+		if a == 0 || b == 0 {
+			return c, true
+		}
+		if (a > 0) != (b > 0) {
+			return c, true
+		}
+		if (c >= 0) == (a >= 0) {
+			return c, true
+		}
+		return 0, false
+	}
+
+	sub8 := func(a, b int8) (int8, bool) {
+
+		if b == math.MinInt8 {
+			if a >= 0 {
+				return 0, false
+			}
+			a++
+			b++
+		}
+
+		return add8(a, -b)
+	}
+
+	mul8 := func(a, b int8) (int8, bool) {
+		if (a == math.MinInt8 && b == -1) || (a == -1 && b == math.MinInt8) {
+			return 0, false
+		}
+		if a == 0 || b == 0 {
+			return 0, true
+		}
+		c := a * b
+		if c/b == a {
+			return c, true
+		}
+		return 0, false
+	}
+
+	quotient8 := func(a, b int8) (int8, int8, bool) {
+
+		if b == 0 {
+			return 0, 0, false
+		}
+		// only two possible overflows
+		if (a == math.MinInt8 && b == -1) || (a == -1 && b == math.MinInt8) {
+			return 0, 0, false
+		}
+		return a / b, a % b, true
+	}
+
+	for a64 := int64(math.MinInt8); a64 <= int64(math.MaxInt8); a64++ {
+
+		for b64 := int64(math.MinInt8); b64 <= int64(math.MaxInt8); b64++ {
+			a8 := int8(a64)
+			b8 := int8(b64)
+			if int64(a8) != a64 || int64(b8) != b64 {
+				t.Fatal("LOGIC FAILURE IN TEST")
+			}
+
+			// ADDITION
+			{
+				r64 := a64 + b64
+				r8 := a8 + b8
+
+				// now the verification
+				result, ok := add8(a8, b8)
+				if ok {
+					if int64(result) != r64 {
+						t.Errorf("failed to fail on %v + %v = %v instead of %v\n", a8, b8, result, r64)
+					}
+				} else {
+					if result != 0 && result == r8 {
+						t.Errorf("failed to fail on %v + %v = %v instead of %v\n", a8, b8, result, r64)
+					}
+				}
+			}
+
+			// SUBTRACTION
+			{
+				r64 := a64 - b64
+				r8 := a8 - b8
+
+				// now the verification
+				result, ok := sub8(a8, b8)
+				if ok {
+					if int64(result) != r64 {
+						t.Errorf("failed to fail on %v - %v = %v instead of %v\n", a8, b8, result, r64)
+					}
+				} else {
+					if result != 0 && result == r8 {
+						t.Errorf("failed to fail on %v - %v = %v instead of %v\n", a8, b8, result, r64)
+					}
+				}
+			}
+
+			// MULTIPLICATION
+			{
+				r64 := a64 * b64
+				r8 := a8 * b8
+
+				// now the verification
+				result, ok := mul8(a8, b8)
+				if ok {
+					if int64(result) != r64 {
+						t.Errorf("failed to fail on %v * %v = %v instead of %v\n", a8, b8, result, r64)
+					}
+				} else {
+					if result != 0 && result == r8 {
+						t.Errorf("failed to fail on %v * %v = %v instead of %v\n", a8, b8, result, r64)
+					}
+				}
+			}
+
+			// DIVISION
+			if b8 != 0 {
+				r64 := a64 / b64
+				r8 := a8 / b8
+
+				// now the verification
+				result, _, ok := quotient8(a8, b8)
+				if ok {
+					if int64(result) != r64 {
+						t.Errorf("failed to fail on %v / %v = %v instead of %v\n", a8, b8, result, r64)
+					}
+				} else {
+					if result != 0 && result == r8 {
+						t.Errorf("failed to fail on %v / %v = %v instead of %v\n", a8, b8, result, r64)
+					}
+				}
+			}
+		}
+	}
+
+}
+
 func TestOperations32(t *testing.T) {
 	table := []struct {
 		f      string
@@ -20,6 +163,8 @@ func TestOperations32(t *testing.T) {
 		{"+", math.MaxInt32, math.MaxInt32, false, 0},
 		{"+", math.MinInt32 + 100, 101, true, math.MinInt32 + 201},
 
+		{"-", -1, math.MinInt32, true, math.MaxInt32},
+		{"-", math.MinInt32, -1, true, math.MinInt32 + 1},
 		{"-", math.MaxInt32, 1, true, math.MaxInt32 - 1},
 		{"-", math.MaxInt32, -1, false, 0},
 		{"-", 0, math.MinInt32, false, 0},
@@ -28,6 +173,7 @@ func TestOperations32(t *testing.T) {
 		{"-", math.MaxInt32, math.MaxInt32, true, 0},
 		{"-", math.MinInt32 + 100, 101, false, 0},
 
+		{"*", math.MinInt32, -1, false, 0},
 		{"*", math.MaxInt32, 1, true, math.MaxInt32},
 		{"*", math.MaxInt32, -1, true, math.MinInt32 + 1},
 		{"*", 0, 0, true, 0},
@@ -96,6 +242,7 @@ func TestOperations64(t *testing.T) {
 		{"+", math.MaxInt64, math.MaxInt64, false, 0},
 		{"+", math.MinInt64 + 100, 101, true, math.MinInt64 + 201},
 
+		{"-", -1, math.MinInt64, true, math.MaxInt64},
 		{"-", math.MaxInt64, 1, true, math.MaxInt64 - 1},
 		{"-", math.MaxInt64, -1, false, 0},
 		{"-", 0, math.MinInt64, false, 0},
@@ -104,6 +251,7 @@ func TestOperations64(t *testing.T) {
 		{"-", math.MaxInt64, math.MaxInt64, true, 0},
 		{"-", math.MinInt64 + 100, 101, false, 0},
 
+		{"*", math.MinInt64, -1, false, 0},
 		{"*", math.MaxInt64, 1, true, math.MaxInt64},
 		{"*", math.MaxInt64, -1, true, math.MinInt64 + 1},
 		{"*", 0, 0, true, 0},
@@ -271,10 +419,12 @@ func TestQuotient(t *testing.T) {
 }
 
 //func TestAdditionInt(t *testing.T) {
+//	fmt.Printf("\nminint8 = %v\n", math.MinInt8)
+//	fmt.Printf("maxint8 = %v\n\n", math.MaxInt8)
 //	fmt.Printf("maxint32 = %v\n", math.MaxInt32)
-//	fmt.Printf("minint32 = %v\n", math.MinInt32)
+//	fmt.Printf("minint32 = %v\n\n", math.MinInt32)
 //	fmt.Printf("maxint64 = %v\n", math.MaxInt64)
-//	fmt.Printf("minint64 = %v\n", math.MinInt64)
+//	fmt.Printf("minint64 = %v\n\n", math.MinInt64)
 //}
 
 func Test64(t *testing.T) {

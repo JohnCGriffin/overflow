@@ -43,7 +43,7 @@ func Add32(a, b int32) (int32, bool) {
 
 	// because the signs of the addends are the same,
 	// the signs of the result should match.
-	if (c > 0) == (a > 0) {
+	if (c >= 0) == (a >= 0) {
 		return c, true
 	}
 
@@ -55,7 +55,11 @@ func Sub32(a, b int32) (int32, bool) {
 
 	// the abs(math.Minint) is greater then math.Maxint
 	if b == math.MinInt32 {
-		return 0, false
+		if a >= 0 {
+			return 0, false
+		}
+		a++
+		b++
 	}
 
 	// otherwise, it's addition
@@ -63,6 +67,9 @@ func Sub32(a, b int32) (int32, bool) {
 }
 
 func Mul32(a, b int32) (int32, bool) {
+	if (a == math.MinInt32 && b == -1) || (a == -1 && b == math.MinInt32) {
+		return 0, false
+	}
 	if a == 0 || b == 0 {
 		return 0, true
 	}
@@ -83,8 +90,8 @@ func Quotient32(a, b int32) (int32, int32, bool) {
 	if b == 0 {
 		return 0, 0, false
 	}
-	// only one possible failure
-	if a == math.MinInt32 && b == -1 {
+	// only two possible overflows
+	if (a == math.MinInt32 && b == -1) || (a == -1 && b == math.MinInt32) {
 		return 0, 0, false
 	}
 	return a / b, a % b, true
@@ -108,7 +115,7 @@ func Add64(a, b int64) (int64, bool) {
 
 	// because the signs of the addends are the same,
 	// the signs of the result should match.
-	if (c > 0) == (a > 0) {
+	if (c >= 0) == (a >= 0) {
 		return c, true
 	}
 
@@ -120,7 +127,11 @@ func Sub64(a, b int64) (int64, bool) {
 
 	// the abs(math.Minint) is greater then math.Maxint
 	if b == math.MinInt64 {
-		return 0, false
+		if a >= 0 {
+			return 0, false
+		}
+		a++
+		b++
 	}
 
 	// otherwise, it's addition
@@ -128,6 +139,9 @@ func Sub64(a, b int64) (int64, bool) {
 }
 
 func Mul64(a, b int64) (int64, bool) {
+	if (a == math.MinInt64 && b == -1) || (a == -1 && b == math.MinInt64) {
+		return 0, false
+	}
 	if a == 0 || b == 0 {
 		return 0, true
 	}
@@ -148,10 +162,11 @@ func Quotient64(a, b int64) (int64, int64, bool) {
 	if b == 0 {
 		return 0, 0, false
 	}
-	// only one possible failure
-	if a == math.MinInt64 && b == -1 {
+	// only two possible overflows
+	if (a == math.MinInt64 && b == -1) || (a == -1 && b == math.MinInt64) {
 		return 0, 0, false
 	}
+
 	return a / b, a % b, true
 }
 
