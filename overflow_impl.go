@@ -13,7 +13,7 @@ func Add8(a, b int8) (int8, bool) {
         if (c > a) == (b > 0) {
                 return c, true
         }
-        return 0, false
+        return c, false
 }
 
 // Add8p is the unchecked panicing version of Add8
@@ -33,7 +33,7 @@ func Sub8(a, b int8) (int8, bool) {
         if (c < a) == (b > 0) {
                 return c, true
         }
-        return 0, false
+        return c, false
 }
 
 // Sub8p is the unchecked panicing version of Sub8
@@ -58,7 +58,7 @@ func Mul8(a, b int8) (int8, bool) {
                         return c, true
                 }
         }
-        return 0, false
+        return c, false
 }
 
 // Mul8p is the unchecked panicing version of Mul8
@@ -95,10 +95,8 @@ func Quotient8(a, b int8) (int8, int8, bool) {
                 return 0, 0, false
         }
         c := a / b
-        if (c < 0) != ((a < 0) != (b < 0)) {
-                return 0, 0, false
-        }
-        return c, a % b, true
+        status := (c < 0) == ((a < 0) != (b < 0))
+        return c, a % b, status
 }
 
 
@@ -110,7 +108,7 @@ func Add16(a, b int16) (int16, bool) {
         if (c > a) == (b > 0) {
                 return c, true
         }
-        return 0, false
+        return c, false
 }
 
 // Add16p is the unchecked panicing version of Add16
@@ -130,7 +128,7 @@ func Sub16(a, b int16) (int16, bool) {
         if (c < a) == (b > 0) {
                 return c, true
         }
-        return 0, false
+        return c, false
 }
 
 // Sub16p is the unchecked panicing version of Sub16
@@ -155,7 +153,7 @@ func Mul16(a, b int16) (int16, bool) {
                         return c, true
                 }
         }
-        return 0, false
+        return c, false
 }
 
 // Mul16p is the unchecked panicing version of Mul16
@@ -192,10 +190,8 @@ func Quotient16(a, b int16) (int16, int16, bool) {
                 return 0, 0, false
         }
         c := a / b
-        if (c < 0) != ((a < 0) != (b < 0)) {
-                return 0, 0, false
-        }
-        return c, a % b, true
+        status := (c < 0) == ((a < 0) != (b < 0))
+        return c, a % b, status
 }
 
 
@@ -207,7 +203,7 @@ func Add32(a, b int32) (int32, bool) {
         if (c > a) == (b > 0) {
                 return c, true
         }
-        return 0, false
+        return c, false
 }
 
 // Add32p is the unchecked panicing version of Add32
@@ -227,7 +223,7 @@ func Sub32(a, b int32) (int32, bool) {
         if (c < a) == (b > 0) {
                 return c, true
         }
-        return 0, false
+        return c, false
 }
 
 // Sub32p is the unchecked panicing version of Sub32
@@ -252,7 +248,7 @@ func Mul32(a, b int32) (int32, bool) {
                         return c, true
                 }
         }
-        return 0, false
+        return c, false
 }
 
 // Mul32p is the unchecked panicing version of Mul32
@@ -289,10 +285,8 @@ func Quotient32(a, b int32) (int32, int32, bool) {
                 return 0, 0, false
         }
         c := a / b
-        if (c < 0) != ((a < 0) != (b < 0)) {
-                return 0, 0, false
-        }
-        return c, a % b, true
+        status := (c < 0) == ((a < 0) != (b < 0))
+        return c, a % b, status
 }
 
 
@@ -304,7 +298,7 @@ func Add64(a, b int64) (int64, bool) {
         if (c > a) == (b > 0) {
                 return c, true
         }
-        return 0, false
+        return c, false
 }
 
 // Add64p is the unchecked panicing version of Add64
@@ -324,7 +318,7 @@ func Sub64(a, b int64) (int64, bool) {
         if (c < a) == (b > 0) {
                 return c, true
         }
-        return 0, false
+        return c, false
 }
 
 // Sub64p is the unchecked panicing version of Sub64
@@ -349,7 +343,7 @@ func Mul64(a, b int64) (int64, bool) {
                         return c, true
                 }
         }
-        return 0, false
+        return c, false
 }
 
 // Mul64p is the unchecked panicing version of Mul64
@@ -386,9 +380,7 @@ func Quotient64(a, b int64) (int64, int64, bool) {
                 return 0, 0, false
         }
         c := a / b
-        if (c < 0) != ((a < 0) != (b < 0)) {
-                return 0, 0, false
-        }
-        return c, a % b, true
+        status := (c < 0) == ((a < 0) != (b < 0))
+        return c, a % b, status
 }
 

@@ -21,7 +21,7 @@ func Add${SIZE}(a, b int${SIZE}) (int${SIZE}, bool) {
         if (c > a) == (b > 0) {
                 return c, true
         }
-        return 0, false
+        return c, false
 }
 
 // Add${SIZE}p is the unchecked panicing version of Add${SIZE}
@@ -41,7 +41,7 @@ func Sub${SIZE}(a, b int${SIZE}) (int${SIZE}, bool) {
         if (c < a) == (b > 0) {
                 return c, true
         }
-        return 0, false
+        return c, false
 }
 
 // Sub${SIZE}p is the unchecked panicing version of Sub${SIZE}
@@ -66,7 +66,7 @@ func Mul${SIZE}(a, b int${SIZE}) (int${SIZE}, bool) {
                         return c, true
                 }
         }
-        return 0, false
+        return c, false
 }
 
 // Mul${SIZE}p is the unchecked panicing version of Mul${SIZE}
@@ -103,10 +103,8 @@ func Quotient${SIZE}(a, b int${SIZE}) (int${SIZE}, int${SIZE}, bool) {
                 return 0, 0, false
         }
         c := a / b
-        if (c < 0) != ((a < 0) != (b < 0)) {
-                return 0, 0, false
-        }
-        return c, a % b, true
+        status := (c < 0) == ((a < 0) != (b < 0))
+        return c, a % b, status
 }
 "
 done
