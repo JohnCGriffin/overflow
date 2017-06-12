@@ -103,7 +103,7 @@ func TestOperations32(t *testing.T) {
 		ok     bool
 		result int32
 	}{
-		{"+", math.MaxInt32, 1, false, 0},
+		{"+", math.MaxInt32, 1, true, 0},
 		{"+", math.MaxInt32, -1, true, math.MaxInt32 - 1},
 		{"+", 0, 0, true, 0},
 		{"+", 1234, 5678, true, 6912},
