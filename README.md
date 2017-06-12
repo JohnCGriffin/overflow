@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/JohnCGriffin/overflow.png)](https://travis-ci.org/JohnCGriffin/overflow)
 # overflow
 Check for int/int8/int16/int64/int32 integer overflow in Golang arithmetic.
 ### Install
