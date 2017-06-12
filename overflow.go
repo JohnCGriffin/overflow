@@ -28,54 +28,30 @@ func _is64Bit() bool {
 // 32 BIT
 
 func Add32(a, b int32) (int32, bool) {
-
 	c := a + b
-
-	// either zero is good
-	if a == 0 || b == 0 {
+	if (c > a) == (b > 0) {
 		return c, true
 	}
-
-	// different signs is good
-	if (a > 0) != (b > 0) {
-		return c, true
-	}
-
-	// because the signs of the addends are the same,
-	// the signs of the result should match.
-	if (c >= 0) == (a >= 0) {
-		return c, true
-	}
-
-	// finally it fails
 	return 0, false
 }
 
 func Sub32(a, b int32) (int32, bool) {
-
-	// the abs(math.Minint) is greater then math.Maxint
-	if b == math.MinInt32 {
-		if a >= 0 {
-			return 0, false
-		}
-		a++
-		b++
+	c := a - b
+	if (c < a) == (b > 0) {
+		return c, true
 	}
-
-	// otherwise, it's addition
-	return Add32(a, -b)
+	return 0, false
 }
 
 func Mul32(a, b int32) (int32, bool) {
-	if (a == math.MinInt32 && b == -1) || (a == -1 && b == math.MinInt32) {
-		return 0, false
-	}
 	if a == 0 || b == 0 {
 		return 0, true
 	}
 	c := a * b
-	if c/b == a {
-		return c, true
+	if (c < 0) == ((a < 0) != (b < 0)) {
+		if c/b == a {
+			return c, true
+		}
 	}
 	return 0, false
 }
@@ -86,68 +62,43 @@ func Div32(a, b int32) (int32, bool) {
 }
 
 func Quotient32(a, b int32) (int32, int32, bool) {
-
 	if b == 0 {
 		return 0, 0, false
 	}
-	// only two possible overflows
-	if (a == math.MinInt32 && b == -1) || (a == -1 && b == math.MinInt32) {
+	c := a / b
+	if (c < 0) != ((a < 0) != (b < 0)) {
 		return 0, 0, false
 	}
-	return a / b, a % b, true
+	return c, a % b, true
 }
 
 // 64 BIT
 
 func Add64(a, b int64) (int64, bool) {
-
 	c := a + b
-
-	// either zero is good
-	if a == 0 || b == 0 {
+	if (c > a) == (b > 0) {
 		return c, true
 	}
-
-	// different signs is good
-	if (a > 0) != (b > 0) {
-		return c, true
-	}
-
-	// because the signs of the addends are the same,
-	// the signs of the result should match.
-	if (c >= 0) == (a >= 0) {
-		return c, true
-	}
-
-	// finally it fails
 	return 0, false
 }
 
 func Sub64(a, b int64) (int64, bool) {
-
-	// the abs(math.Minint) is greater then math.Maxint
-	if b == math.MinInt64 {
-		if a >= 0 {
-			return 0, false
-		}
-		a++
-		b++
+	c := a - b
+	if (c < a) == (b > 0) {
+		return c, true
 	}
-
-	// otherwise, it's addition
-	return Add64(a, -b)
+	return 0, false
 }
 
 func Mul64(a, b int64) (int64, bool) {
-	if (a == math.MinInt64 && b == -1) || (a == -1 && b == math.MinInt64) {
-		return 0, false
-	}
 	if a == 0 || b == 0 {
 		return 0, true
 	}
 	c := a * b
-	if c/b == a {
-		return c, true
+	if (c < 0) == ((a < 0) != (b < 0)) {
+		if c/b == a {
+			return c, true
+		}
 	}
 	return 0, false
 }
@@ -158,16 +109,14 @@ func Div64(a, b int64) (int64, bool) {
 }
 
 func Quotient64(a, b int64) (int64, int64, bool) {
-
 	if b == 0 {
 		return 0, 0, false
 	}
-	// only two possible overflows
-	if (a == math.MinInt64 && b == -1) || (a == -1 && b == math.MinInt64) {
+	c := a / b
+	if (c < 0) != ((a < 0) != (b < 0)) {
 		return 0, 0, false
 	}
-
-	return a / b, a % b, true
+	return c, a % b, true
 }
 
 /********** PARTIAL TEST COVERAGE FROM HERE DOWN *************

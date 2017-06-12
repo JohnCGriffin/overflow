@@ -13,55 +13,42 @@ func TestAlgorithms(t *testing.T) {
 
 	add8 := func(a, b int8) (int8, bool) {
 		c := a + b
-		if a == 0 || b == 0 {
-			return c, true
-		}
-		if (a > 0) != (b > 0) {
-			return c, true
-		}
-		if (c >= 0) == (a >= 0) {
+		if (c > a) == (b > 0) {
 			return c, true
 		}
 		return 0, false
 	}
 
 	sub8 := func(a, b int8) (int8, bool) {
-
-		if b == math.MinInt8 {
-			if a >= 0 {
-				return 0, false
-			}
-			a++
-			b++
-		}
-
-		return add8(a, -b)
-	}
-
-	mul8 := func(a, b int8) (int8, bool) {
-		if (a == math.MinInt8 && b == -1) || (a == -1 && b == math.MinInt8) {
-			return 0, false
-		}
-		if a == 0 || b == 0 {
-			return 0, true
-		}
-		c := a * b
-		if c/b == a {
+		c := a - b
+		if (c < a) == (b > 0) {
 			return c, true
 		}
 		return 0, false
 	}
 
-	quotient8 := func(a, b int8) (int8, int8, bool) {
+	mul8 := func(a, b int8) (int8, bool) {
+		if a == 0 || b == 0 {
+			return 0, true
+		}
+		c := a * b
+		if (c < 0) == ((a < 0) != (b < 0)) {
+			if c/b == a {
+				return c, true
+			}
+		}
+		return 0, false
+	}
 
+	quotient8 := func(a, b int8) (int8, int8, bool) {
 		if b == 0 {
 			return 0, 0, false
 		}
-		// only two possible overflows
-		if (a == math.MinInt8 && b == -1) || (a == -1 && b == math.MinInt8) {
+		c := a / b
+		if (c < 0) != ((a < 0) != (b < 0)) {
 			return 0, 0, false
 		}
-		return a / b, a % b, true
+		return c, a % b, true
 	}
 
 	for a64 := int64(math.MinInt8); a64 <= int64(math.MaxInt8); a64++ {
