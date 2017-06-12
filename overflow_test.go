@@ -11,46 +11,6 @@ import "fmt"
 
 func TestAlgorithms(t *testing.T) {
 
-	add8 := func(a, b int8) (int8, bool) {
-		c := a + b
-		if (c > a) == (b > 0) {
-			return c, true
-		}
-		return 0, false
-	}
-
-	sub8 := func(a, b int8) (int8, bool) {
-		c := a - b
-		if (c < a) == (b > 0) {
-			return c, true
-		}
-		return 0, false
-	}
-
-	mul8 := func(a, b int8) (int8, bool) {
-		if a == 0 || b == 0 {
-			return 0, true
-		}
-		c := a * b
-		if (c < 0) == ((a < 0) != (b < 0)) {
-			if c/b == a {
-				return c, true
-			}
-		}
-		return 0, false
-	}
-
-	quotient8 := func(a, b int8) (int8, int8, bool) {
-		if b == 0 {
-			return 0, 0, false
-		}
-		c := a / b
-		if (c < 0) != ((a < 0) != (b < 0)) {
-			return 0, 0, false
-		}
-		return c, a % b, true
-	}
-
 	for a64 := int64(math.MinInt8); a64 <= int64(math.MaxInt8); a64++ {
 
 		for b64 := int64(math.MinInt8); b64 <= int64(math.MaxInt8); b64++ {
@@ -66,7 +26,7 @@ func TestAlgorithms(t *testing.T) {
 				r8 := a8 + b8
 
 				// now the verification
-				result, ok := add8(a8, b8)
+				result, ok := Add8(a8, b8)
 				if ok {
 					if int64(result) != r64 {
 						t.Errorf("failed to fail on %v + %v = %v instead of %v\n", a8, b8, result, r64)
@@ -84,7 +44,7 @@ func TestAlgorithms(t *testing.T) {
 				r8 := a8 - b8
 
 				// now the verification
-				result, ok := sub8(a8, b8)
+				result, ok := Sub8(a8, b8)
 				if ok {
 					if int64(result) != r64 {
 						t.Errorf("failed to fail on %v - %v = %v instead of %v\n", a8, b8, result, r64)
@@ -102,7 +62,7 @@ func TestAlgorithms(t *testing.T) {
 				r8 := a8 * b8
 
 				// now the verification
-				result, ok := mul8(a8, b8)
+				result, ok := Mul8(a8, b8)
 				if ok {
 					if int64(result) != r64 {
 						t.Errorf("failed to fail on %v * %v = %v instead of %v\n", a8, b8, result, r64)
@@ -120,7 +80,7 @@ func TestAlgorithms(t *testing.T) {
 				r8 := a8 / b8
 
 				// now the verification
-				result, _, ok := quotient8(a8, b8)
+				result, _, ok := Quotient8(a8, b8)
 				if ok {
 					if int64(result) != r64 {
 						t.Errorf("failed to fail on %v / %v = %v instead of %v\n", a8, b8, result, r64)

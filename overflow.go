@@ -18,6 +18,8 @@
 
 package overflow
 
+//go:generate ./overflow_template.sh 
+
 import "math"
 
 func _is64Bit() bool {
@@ -25,99 +27,6 @@ func _is64Bit() bool {
 	return ((maxU32 << 1) >> 1) == maxU32
 }
 
-// 32 BIT
-
-func Add32(a, b int32) (int32, bool) {
-	c := a + b
-	if (c > a) == (b > 0) {
-		return c, true
-	}
-	return 0, false
-}
-
-func Sub32(a, b int32) (int32, bool) {
-	c := a - b
-	if (c < a) == (b > 0) {
-		return c, true
-	}
-	return 0, false
-}
-
-func Mul32(a, b int32) (int32, bool) {
-	if a == 0 || b == 0 {
-		return 0, true
-	}
-	c := a * b
-	if (c < 0) == ((a < 0) != (b < 0)) {
-		if c/b == a {
-			return c, true
-		}
-	}
-	return 0, false
-}
-
-func Div32(a, b int32) (int32, bool) {
-	q, _, ok := Quotient32(a, b)
-	return q, ok
-}
-
-func Quotient32(a, b int32) (int32, int32, bool) {
-	if b == 0 {
-		return 0, 0, false
-	}
-	c := a / b
-	if (c < 0) != ((a < 0) != (b < 0)) {
-		return 0, 0, false
-	}
-	return c, a % b, true
-}
-
-// 64 BIT
-
-func Add64(a, b int64) (int64, bool) {
-	c := a + b
-	if (c > a) == (b > 0) {
-		return c, true
-	}
-	return 0, false
-}
-
-func Sub64(a, b int64) (int64, bool) {
-	c := a - b
-	if (c < a) == (b > 0) {
-		return c, true
-	}
-	return 0, false
-}
-
-func Mul64(a, b int64) (int64, bool) {
-	if a == 0 || b == 0 {
-		return 0, true
-	}
-	c := a * b
-	if (c < 0) == ((a < 0) != (b < 0)) {
-		if c/b == a {
-			return c, true
-		}
-	}
-	return 0, false
-}
-
-func Div64(a, b int64) (int64, bool) {
-	q, _, ok := Quotient64(a, b)
-	return q, ok
-}
-
-func Quotient64(a, b int64) (int64, int64, bool) {
-	if b == 0 {
-		return 0, 0, false
-	}
-	c := a / b
-	if (c < 0) != ((a < 0) != (b < 0)) {
-		return 0, 0, false
-	}
-	return c, a % b, true
-}
 
 /********** PARTIAL TEST COVERAGE FROM HERE DOWN *************
 
