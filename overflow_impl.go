@@ -62,7 +62,7 @@ func Mul8(a, b int8) (int8, bool) {
 }
 
 // Mul8p is the unchecked panicing version of Mul8
-func Mulp8(a, b int8) int8 {
+func Mul8p(a, b int8) int8 {
         r, ok := Mul8(a, b)
         if !ok {
                 panic("multiplication overflow")
@@ -80,7 +80,7 @@ func Div8(a, b int8) (int8, bool) {
 }
 
 // Div8p is the unchecked panicing version of Div8
-func Divp8(a, b int8) int8 {
+func Div8p(a, b int8) int8 {
         r, ok := Div8(a, b)
         if !ok {
                 panic("division failure")
@@ -157,7 +157,7 @@ func Mul16(a, b int16) (int16, bool) {
 }
 
 // Mul16p is the unchecked panicing version of Mul16
-func Mulp16(a, b int16) int16 {
+func Mul16p(a, b int16) int16 {
         r, ok := Mul16(a, b)
         if !ok {
                 panic("multiplication overflow")
@@ -175,7 +175,7 @@ func Div16(a, b int16) (int16, bool) {
 }
 
 // Div16p is the unchecked panicing version of Div16
-func Divp16(a, b int16) int16 {
+func Div16p(a, b int16) int16 {
         r, ok := Div16(a, b)
         if !ok {
                 panic("division failure")
@@ -252,7 +252,7 @@ func Mul32(a, b int32) (int32, bool) {
 }
 
 // Mul32p is the unchecked panicing version of Mul32
-func Mulp32(a, b int32) int32 {
+func Mul32p(a, b int32) int32 {
         r, ok := Mul32(a, b)
         if !ok {
                 panic("multiplication overflow")
@@ -270,7 +270,7 @@ func Div32(a, b int32) (int32, bool) {
 }
 
 // Div32p is the unchecked panicing version of Div32
-func Divp32(a, b int32) int32 {
+func Div32p(a, b int32) int32 {
         r, ok := Div32(a, b)
         if !ok {
                 panic("division failure")
@@ -347,7 +347,7 @@ func Mul64(a, b int64) (int64, bool) {
 }
 
 // Mul64p is the unchecked panicing version of Mul64
-func Mulp64(a, b int64) int64 {
+func Mul64p(a, b int64) int64 {
         r, ok := Mul64(a, b)
         if !ok {
                 panic("multiplication overflow")
@@ -365,7 +365,7 @@ func Div64(a, b int64) (int64, bool) {
 }
 
 // Div64p is the unchecked panicing version of Div64
-func Divp64(a, b int64) int64 {
+func Div64p(a, b int64) int64 {
         r, ok := Div64(a, b)
         if !ok {
                 panic("division failure")

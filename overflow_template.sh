@@ -70,7 +70,7 @@ func Mul${SIZE}(a, b int${SIZE}) (int${SIZE}, bool) {
 }
 
 // Mul${SIZE}p is the unchecked panicing version of Mul${SIZE}
-func Mulp${SIZE}(a, b int${SIZE}) int${SIZE} {
+func Mul${SIZE}p(a, b int${SIZE}) int${SIZE} {
         r, ok := Mul${SIZE}(a, b)
         if !ok {
                 panic(\"multiplication overflow\")
@@ -88,7 +88,7 @@ func Div${SIZE}(a, b int${SIZE}) (int${SIZE}, bool) {
 }
 
 // Div${SIZE}p is the unchecked panicing version of Div${SIZE}
-func Divp${SIZE}(a, b int${SIZE}) int${SIZE} {
+func Div${SIZE}p(a, b int${SIZE}) int${SIZE} {
         r, ok := Div${SIZE}(a, b)
         if !ok {
                 panic(\"division failure\")
