@@ -1,20 +1,22 @@
-// Package overflow offers overflow-checked integer arithmetic operations for int, int32, and int64.
-// Each of the operations returns a result,bool combination.  This was prompted by the need to know
-// when to flow into higher precision types from the math.big library.
-//
-// For instance, assuing a 64 bit machine:
-//
-// 10 + 20 -> 30
-// int(math.MaxInt64) + 1 -> -9223372036854775808
-//
-// whereas
-//
-// overflow.Add(10,20) -> (30, true)
-// overflow.Add(math.MaxInt64,1) -> (0, false)
-//
-// Add, Sub, Mul, Div are for int.  Add64, Add32, etc. are specifically sized.
-//
-// If anybody wishes an unsigned version, submit a pull request for code and new tests.
+/*Package overflow offers overflow-checked integer arithmetic operations
+for int, int32, and int64. Each of the operations returns a
+result,bool combination.  This was prompted by the need to know when
+to flow into higher precision types from the math.big library.
+
+For instance, assuing a 64 bit machine:
+
+10 + 20 -> 30
+int(math.MaxInt64) + 1 -> -9223372036854775808
+
+whereas
+
+overflow.Add(10,20) -> (30, true)
+overflow.Add(math.MaxInt64,1) -> (0, false)
+
+Add, Sub, Mul, Div are for int.  Add64, Add32, etc. are specifically sized.
+
+If anybody wishes an unsigned version, submit a pull request for code
+and new tests. */
 package overflow
 
 //go:generate ./overflow_template.sh
