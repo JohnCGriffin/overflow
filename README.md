@@ -59,7 +59,7 @@ use the easier Addp, Mulp, Subp, and Divp versions which return the normal resul
 - - -
 MIT License
 
-Copyright (c) 2018 John C. Griffin, 
+Copyright (c) 2017 John C. Griffin, 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
