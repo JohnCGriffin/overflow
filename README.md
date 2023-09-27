@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/JohnCGriffin/overflow.png)](https://travis-ci.org/JohnCGriffin/overflow)
 # overflow
-Check for int/int8/int16/int64/int32 integer overflow in Golang arithmetic.
+Check for integer overflow in Golang arithmetic.
 ### Install
 ```
 go get github.com/johncgriffin/overflow
@@ -46,8 +46,7 @@ yields the output
 9223372036854775802+9 -> (0,false)
 ```
 
-For int, int64, and int32 types, provide Add, Add32, Add64, Sub, Sub32, Sub64, etc.  
-Unsigned types not covered at the moment, but such additions are welcome.
+For (u)int types, provide (U)Add, (U)Sub, (U)Mul, (U)Div, (U)Quotient, etc.
 
 ### Stay calm and panic
 
