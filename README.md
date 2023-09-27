@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/JohnCGriffin/overflow.png)](https://travis-ci.org/JohnCGriffin/overflow)
 # overflow
-Check for integer overflow in Golang arithmetic.
+Check for integer overflow in Golang arithmetic and type conversion.
 ### Install
 ```
 go get github.com/johncgriffin/overflow
@@ -13,6 +13,7 @@ go generate
 ```
 ### Synopsis
 
+#### Arithmetic overflow detection
 ```
 package main
 
@@ -48,6 +49,34 @@ yields the output
 
 For (u)int types, provide (U)Add, (U)Sub, (U)Mul, (U)Div, (U)Quotient, etc.
 
+
+#### Type conversion overflow detection
+```
+func main() {
+	var i uint
+	for i = math.MaxInt - 5; i <= math.MaxInt+5; i++ {
+		ret, ok := overflow.UintToInt(i)
+		fmt.Printf("%v -> (%v,%v)\n",
+			i, ret, ok)
+	}
+}
+```
+yields the output
+```
+9223372036854775802 -> (9223372036854775802,true)
+9223372036854775803 -> (9223372036854775803,true)
+9223372036854775804 -> (9223372036854775804,true)
+9223372036854775805 -> (9223372036854775805,true)
+9223372036854775806 -> (9223372036854775806,true)
+9223372036854775807 -> (9223372036854775807,true)
+9223372036854775808 -> (-9223372036854775808,false)
+9223372036854775809 -> (-9223372036854775807,false)
+9223372036854775810 -> (-9223372036854775806,false)
+9223372036854775811 -> (-9223372036854775805,false)
+9223372036854775812 -> (-9223372036854775804,false)
+```
+Provide UintToInt, IntToUint, Uint64ToInt32, Int32ToUint64, etc.
+
 ### Stay calm and panic
 
 There's a good case to be made that a panic is an unidiomatic but proper response.  Iff you
@@ -77,7 +106,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 
 
 

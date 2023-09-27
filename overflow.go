@@ -142,6 +142,28 @@ func UQuotient(a, b uint) (uint, uint, bool) {
 	return uint(uq32), uint(ur32), ok
 }
 
+// IntToUint converts an int value to uint.
+// returning a converted value and a bool value indicating whether the operation is safe.
+func IntToUint(x int) (uint, bool) {
+	if _is64Bit() {
+		y64, ok := Int64ToUint64(int64(x))
+		return uint(y64), ok
+	}
+	y32, ok := Int32ToUint32(int32(x))
+	return uint(y32), ok
+}
+
+// UintToInt converts an uint value to int.
+// returning a converted value and a bool value indicating whether the operation is safe.
+func UintToInt(x uint) (int, bool) {
+	if _is64Bit() {
+		y64, ok := Uint64ToInt64(uint64(x))
+		return int(y64), ok
+	}
+	y32, ok := Uint32ToInt32(uint32(x))
+	return int(y32), ok
+}
+
 /************* Panic versions for int ****************/
 
 // Addp returns the sum of two ints, panicking on overflow
@@ -212,6 +234,24 @@ func UDivp(a, b uint) uint {
 	r, ok := UDiv(a, b)
 	if !ok {
 		panic("division failure")
+	}
+	return r
+}
+
+// IntToUintp converts an uint value to int, panicking on overflow.
+func IntToUintp(x int) uint {
+	r, ok := IntToUint(x)
+	if !ok {
+		panic("conversion failure")
+	}
+	return r
+}
+
+// UintToIntp converts an uint value to int, panicking on overflow.
+func UintToIntp(x uint) int {
+	r, ok := UintToInt(x)
+	if !ok {
+		panic("conversion failure")
 	}
 	return r
 }

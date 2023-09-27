@@ -1,8 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
 exec > overflow_impl.go
 
 echo "package overflow
+
+import \"math\"
 
 // This is generated code, created by overflow_template.sh executed
 // by \"go generate\"
@@ -192,4 +194,90 @@ func UQuotient${SIZE}(a, b uint${SIZE}) (uint${SIZE}, uint${SIZE}, bool) {
         return c, a % b, true
 }
 "
+done
+
+SIZE=(64 32 16 8)
+
+# Int -> Int
+for FROM in {0..3}; do
+for TO in $(seq $((FROM + 1)) 3); do
+echo "
+
+// Int${SIZE[FROM]}ToInt${SIZE[TO]} converts an int${SIZE[FROM]} value to int${SIZE[TO]}.
+// returning a converted value and a bool value indicating whether the operation is safe.
+func Int${SIZE[FROM]}ToInt${SIZE[TO]}(x int${SIZE[FROM]}) (int${SIZE[TO]}, bool) {
+        y := int${SIZE[TO]}(x)
+        if math.MinInt${SIZE[TO]} <= x && x <= math.MaxInt${SIZE[TO]} {
+                return y, true
+        }
+        return y, false
+}
+
+"
+done
+done
+
+# Uint -> Uint
+for FROM in {0..3}; do
+for TO in $(seq $((FROM + 1)) 3); do
+echo "
+
+// Uint${SIZE[FROM]}ToUint${SIZE[TO]} converts an uint${SIZE[FROM]} value to uint${SIZE[TO]}.
+// returning a converted value and a bool value indicating whether the operation is safe.
+func Uint${SIZE[FROM]}ToUint${SIZE[TO]}(x uint${SIZE[FROM]}) (uint${SIZE[TO]}, bool) {
+        y := uint${SIZE[TO]}(x)
+        if x <= math.MaxUint${SIZE[TO]} {
+                return y, true
+        }
+        return y, false
+}
+
+"
+done
+done
+
+# Uint -> Int
+for FROM in {0..3}; do
+for TO in $(seq $((FROM)) 3); do
+echo "
+
+// Uint${SIZE[FROM]}ToInt${SIZE[TO]} converts an uint${SIZE[FROM]} value to int${SIZE[TO]}.
+// returning a converted value and a bool value indicating whether the operation is safe.
+func Uint${SIZE[FROM]}ToInt${SIZE[TO]}(x uint${SIZE[FROM]}) (int${SIZE[TO]}, bool) {
+        y := int${SIZE[TO]}(x)
+        if x <= math.MaxInt${SIZE[TO]} {
+                return y, true
+        }
+        return y, false
+}
+
+"
+done
+done
+
+
+# Int -> Uint
+for FROM in {0..3}; do
+for TO in {0..3}; do
+echo "
+
+// Int${SIZE[FROM]}ToUint${SIZE[TO]} converts an int${SIZE[FROM]} value to uint${SIZE[TO]}.
+// returning a converted value and a bool value indicating whether the operation is safe.
+func Int${SIZE[FROM]}ToUint${SIZE[TO]}(x int${SIZE[FROM]}) (uint${SIZE[TO]}, bool) {
+        y := uint${SIZE[TO]}(x)"
+    if [ "$((SIZE[FROM]))" -gt "$((SIZE[TO]))" ]; then
+        echo "\
+        if 0 <= x && x <= math.MaxUint${SIZE[TO]} {"
+    else  
+        echo "\
+        if 0 <= x {"
+    fi
+echo "\
+                return y, true
+        }
+        return y, false
+}
+
+"
+done
 done
