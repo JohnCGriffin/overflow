@@ -9,7 +9,7 @@ import "math"
 
 
 // Add8 performs + operation on two int8 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Add8(a, b int8) (int8, bool) {
         c := a + b
         if (c > a) == (b > 0) {
@@ -28,7 +28,7 @@ func Add8p(a, b int8) int8 {
 }
 
 // UAdd8 performs + operation on two uint8 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UAdd8(a, b uint8) (uint8, bool) {
         c := a + b
         if c >= a {
@@ -48,7 +48,7 @@ func UAdd8p(a, b uint8) uint8 {
 
 
 // Sub8 performs - operation on two int8 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Sub8(a, b int8) (int8, bool) {
         c := a - b
         if (c < a) == (b > 0) {
@@ -67,7 +67,7 @@ func Sub8p(a, b int8) int8 {
 }
 
 // USub8 performs - operation on two uint8 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func USub8(a, b uint8) (uint8, bool) {
         c := a - b
         if a >= b {
@@ -87,7 +87,7 @@ func USub8p(a, b uint8) uint8 {
 
 
 // Mul8 performs * operation on two int8 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Mul8(a, b int8) (int8, bool) {
         if a == 0 || b == 0 {
                 return 0, true
@@ -111,7 +111,7 @@ func Mul8p(a, b int8) int8 {
 }
 
 // UMul8 performs * operation on two uint8 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UMul8(a, b uint8) (uint8, bool) {
         if a == 0 || b == 0 {
                 return 0, true
@@ -134,7 +134,7 @@ func UMul8p(a, b uint8) uint8 {
 
 
 // Div8 performs / operation on two int8 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Div8(a, b int8) (int8, bool) {
         q, _, ok := Quotient8(a, b)
         return q, ok
@@ -150,7 +150,7 @@ func Div8p(a, b int8) int8 {
 }
 
 // Quotient8 performs + operation on two int8 operands
-// returning a quotient, a remainder and status
+// returning a quotient, a remainder and a ok result indicating whether the operation is safe.
 func Quotient8(a, b int8) (int8, int8, bool) {
         if b == 0 {
                 return 0, 0, false
@@ -161,7 +161,7 @@ func Quotient8(a, b int8) (int8, int8, bool) {
 }
 
 // UDiv8 performs / operation on two uint8 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UDiv8(a, b uint8) (uint8, bool) {
         q, _, ok := UQuotient8(a, b)
         return q, ok
@@ -177,7 +177,7 @@ func UDiv8p(a, b uint8) uint8 {
 }
 
 // UQuotient8 performs + operation on two uint8 operands
-// returning a quotient, a remainder and status
+// returning a quotient, a remainder and a ok result indicating whether the operation is safe.
 func UQuotient8(a, b uint8) (uint8, uint8, bool) {
         if b == 0 {
                 return 0, 0, false
@@ -189,7 +189,7 @@ func UQuotient8(a, b uint8) (uint8, uint8, bool) {
 
 
 // Add16 performs + operation on two int16 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Add16(a, b int16) (int16, bool) {
         c := a + b
         if (c > a) == (b > 0) {
@@ -208,7 +208,7 @@ func Add16p(a, b int16) int16 {
 }
 
 // UAdd16 performs + operation on two uint16 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UAdd16(a, b uint16) (uint16, bool) {
         c := a + b
         if c >= a {
@@ -228,7 +228,7 @@ func UAdd16p(a, b uint16) uint16 {
 
 
 // Sub16 performs - operation on two int16 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Sub16(a, b int16) (int16, bool) {
         c := a - b
         if (c < a) == (b > 0) {
@@ -247,7 +247,7 @@ func Sub16p(a, b int16) int16 {
 }
 
 // USub16 performs - operation on two uint16 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func USub16(a, b uint16) (uint16, bool) {
         c := a - b
         if a >= b {
@@ -267,7 +267,7 @@ func USub16p(a, b uint16) uint16 {
 
 
 // Mul16 performs * operation on two int16 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Mul16(a, b int16) (int16, bool) {
         if a == 0 || b == 0 {
                 return 0, true
@@ -291,7 +291,7 @@ func Mul16p(a, b int16) int16 {
 }
 
 // UMul16 performs * operation on two uint16 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UMul16(a, b uint16) (uint16, bool) {
         if a == 0 || b == 0 {
                 return 0, true
@@ -314,7 +314,7 @@ func UMul16p(a, b uint16) uint16 {
 
 
 // Div16 performs / operation on two int16 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Div16(a, b int16) (int16, bool) {
         q, _, ok := Quotient16(a, b)
         return q, ok
@@ -330,7 +330,7 @@ func Div16p(a, b int16) int16 {
 }
 
 // Quotient16 performs + operation on two int16 operands
-// returning a quotient, a remainder and status
+// returning a quotient, a remainder and a ok result indicating whether the operation is safe.
 func Quotient16(a, b int16) (int16, int16, bool) {
         if b == 0 {
                 return 0, 0, false
@@ -341,7 +341,7 @@ func Quotient16(a, b int16) (int16, int16, bool) {
 }
 
 // UDiv16 performs / operation on two uint16 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UDiv16(a, b uint16) (uint16, bool) {
         q, _, ok := UQuotient16(a, b)
         return q, ok
@@ -357,7 +357,7 @@ func UDiv16p(a, b uint16) uint16 {
 }
 
 // UQuotient16 performs + operation on two uint16 operands
-// returning a quotient, a remainder and status
+// returning a quotient, a remainder and a ok result indicating whether the operation is safe.
 func UQuotient16(a, b uint16) (uint16, uint16, bool) {
         if b == 0 {
                 return 0, 0, false
@@ -369,7 +369,7 @@ func UQuotient16(a, b uint16) (uint16, uint16, bool) {
 
 
 // Add32 performs + operation on two int32 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Add32(a, b int32) (int32, bool) {
         c := a + b
         if (c > a) == (b > 0) {
@@ -388,7 +388,7 @@ func Add32p(a, b int32) int32 {
 }
 
 // UAdd32 performs + operation on two uint32 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UAdd32(a, b uint32) (uint32, bool) {
         c := a + b
         if c >= a {
@@ -408,7 +408,7 @@ func UAdd32p(a, b uint32) uint32 {
 
 
 // Sub32 performs - operation on two int32 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Sub32(a, b int32) (int32, bool) {
         c := a - b
         if (c < a) == (b > 0) {
@@ -427,7 +427,7 @@ func Sub32p(a, b int32) int32 {
 }
 
 // USub32 performs - operation on two uint32 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func USub32(a, b uint32) (uint32, bool) {
         c := a - b
         if a >= b {
@@ -447,7 +447,7 @@ func USub32p(a, b uint32) uint32 {
 
 
 // Mul32 performs * operation on two int32 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Mul32(a, b int32) (int32, bool) {
         if a == 0 || b == 0 {
                 return 0, true
@@ -471,7 +471,7 @@ func Mul32p(a, b int32) int32 {
 }
 
 // UMul32 performs * operation on two uint32 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UMul32(a, b uint32) (uint32, bool) {
         if a == 0 || b == 0 {
                 return 0, true
@@ -494,7 +494,7 @@ func UMul32p(a, b uint32) uint32 {
 
 
 // Div32 performs / operation on two int32 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Div32(a, b int32) (int32, bool) {
         q, _, ok := Quotient32(a, b)
         return q, ok
@@ -510,7 +510,7 @@ func Div32p(a, b int32) int32 {
 }
 
 // Quotient32 performs + operation on two int32 operands
-// returning a quotient, a remainder and status
+// returning a quotient, a remainder and a ok result indicating whether the operation is safe.
 func Quotient32(a, b int32) (int32, int32, bool) {
         if b == 0 {
                 return 0, 0, false
@@ -521,7 +521,7 @@ func Quotient32(a, b int32) (int32, int32, bool) {
 }
 
 // UDiv32 performs / operation on two uint32 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UDiv32(a, b uint32) (uint32, bool) {
         q, _, ok := UQuotient32(a, b)
         return q, ok
@@ -537,7 +537,7 @@ func UDiv32p(a, b uint32) uint32 {
 }
 
 // UQuotient32 performs + operation on two uint32 operands
-// returning a quotient, a remainder and status
+// returning a quotient, a remainder and a ok result indicating whether the operation is safe.
 func UQuotient32(a, b uint32) (uint32, uint32, bool) {
         if b == 0 {
                 return 0, 0, false
@@ -549,7 +549,7 @@ func UQuotient32(a, b uint32) (uint32, uint32, bool) {
 
 
 // Add64 performs + operation on two int64 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Add64(a, b int64) (int64, bool) {
         c := a + b
         if (c > a) == (b > 0) {
@@ -568,7 +568,7 @@ func Add64p(a, b int64) int64 {
 }
 
 // UAdd64 performs + operation on two uint64 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UAdd64(a, b uint64) (uint64, bool) {
         c := a + b
         if c >= a {
@@ -588,7 +588,7 @@ func UAdd64p(a, b uint64) uint64 {
 
 
 // Sub64 performs - operation on two int64 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Sub64(a, b int64) (int64, bool) {
         c := a - b
         if (c < a) == (b > 0) {
@@ -607,7 +607,7 @@ func Sub64p(a, b int64) int64 {
 }
 
 // USub64 performs - operation on two uint64 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func USub64(a, b uint64) (uint64, bool) {
         c := a - b
         if a >= b {
@@ -627,7 +627,7 @@ func USub64p(a, b uint64) uint64 {
 
 
 // Mul64 performs * operation on two int64 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Mul64(a, b int64) (int64, bool) {
         if a == 0 || b == 0 {
                 return 0, true
@@ -651,7 +651,7 @@ func Mul64p(a, b int64) int64 {
 }
 
 // UMul64 performs * operation on two uint64 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UMul64(a, b uint64) (uint64, bool) {
         if a == 0 || b == 0 {
                 return 0, true
@@ -674,7 +674,7 @@ func UMul64p(a, b uint64) uint64 {
 
 
 // Div64 performs / operation on two int64 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Div64(a, b int64) (int64, bool) {
         q, _, ok := Quotient64(a, b)
         return q, ok
@@ -690,7 +690,7 @@ func Div64p(a, b int64) int64 {
 }
 
 // Quotient64 performs + operation on two int64 operands
-// returning a quotient, a remainder and status
+// returning a quotient, a remainder and a ok result indicating whether the operation is safe.
 func Quotient64(a, b int64) (int64, int64, bool) {
         if b == 0 {
                 return 0, 0, false
@@ -701,7 +701,7 @@ func Quotient64(a, b int64) (int64, int64, bool) {
 }
 
 // UDiv64 performs / operation on two uint64 operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UDiv64(a, b uint64) (uint64, bool) {
         q, _, ok := UQuotient64(a, b)
         return q, ok
@@ -717,7 +717,7 @@ func UDiv64p(a, b uint64) uint64 {
 }
 
 // UQuotient64 performs + operation on two uint64 operands
-// returning a quotient, a remainder and status
+// returning a quotient, a remainder and a ok result indicating whether the operation is safe.
 func UQuotient64(a, b uint64) (uint64, uint64, bool) {
         if b == 0 {
                 return 0, 0, false
@@ -729,7 +729,7 @@ func UQuotient64(a, b uint64) (uint64, uint64, bool) {
 
 
 // Int64ToInt32 converts an int64 value to int32.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int64ToInt32(x int64) (int32, bool) {
         y := int32(x)
         if math.MinInt32 <= x && x <= math.MaxInt32 {
@@ -742,7 +742,7 @@ func Int64ToInt32(x int64) (int32, bool) {
 
 
 // Int64ToInt16 converts an int64 value to int16.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int64ToInt16(x int64) (int16, bool) {
         y := int16(x)
         if math.MinInt16 <= x && x <= math.MaxInt16 {
@@ -755,7 +755,7 @@ func Int64ToInt16(x int64) (int16, bool) {
 
 
 // Int64ToInt8 converts an int64 value to int8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int64ToInt8(x int64) (int8, bool) {
         y := int8(x)
         if math.MinInt8 <= x && x <= math.MaxInt8 {
@@ -768,7 +768,7 @@ func Int64ToInt8(x int64) (int8, bool) {
 
 
 // Int32ToInt16 converts an int32 value to int16.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int32ToInt16(x int32) (int16, bool) {
         y := int16(x)
         if math.MinInt16 <= x && x <= math.MaxInt16 {
@@ -781,7 +781,7 @@ func Int32ToInt16(x int32) (int16, bool) {
 
 
 // Int32ToInt8 converts an int32 value to int8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int32ToInt8(x int32) (int8, bool) {
         y := int8(x)
         if math.MinInt8 <= x && x <= math.MaxInt8 {
@@ -794,7 +794,7 @@ func Int32ToInt8(x int32) (int8, bool) {
 
 
 // Int16ToInt8 converts an int16 value to int8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int16ToInt8(x int16) (int8, bool) {
         y := int8(x)
         if math.MinInt8 <= x && x <= math.MaxInt8 {
@@ -807,7 +807,7 @@ func Int16ToInt8(x int16) (int8, bool) {
 
 
 // Uint64ToUint32 converts an uint64 value to uint32.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint64ToUint32(x uint64) (uint32, bool) {
         y := uint32(x)
         if x <= math.MaxUint32 {
@@ -820,7 +820,7 @@ func Uint64ToUint32(x uint64) (uint32, bool) {
 
 
 // Uint64ToUint16 converts an uint64 value to uint16.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint64ToUint16(x uint64) (uint16, bool) {
         y := uint16(x)
         if x <= math.MaxUint16 {
@@ -833,7 +833,7 @@ func Uint64ToUint16(x uint64) (uint16, bool) {
 
 
 // Uint64ToUint8 converts an uint64 value to uint8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint64ToUint8(x uint64) (uint8, bool) {
         y := uint8(x)
         if x <= math.MaxUint8 {
@@ -846,7 +846,7 @@ func Uint64ToUint8(x uint64) (uint8, bool) {
 
 
 // Uint32ToUint16 converts an uint32 value to uint16.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint32ToUint16(x uint32) (uint16, bool) {
         y := uint16(x)
         if x <= math.MaxUint16 {
@@ -859,7 +859,7 @@ func Uint32ToUint16(x uint32) (uint16, bool) {
 
 
 // Uint32ToUint8 converts an uint32 value to uint8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint32ToUint8(x uint32) (uint8, bool) {
         y := uint8(x)
         if x <= math.MaxUint8 {
@@ -872,7 +872,7 @@ func Uint32ToUint8(x uint32) (uint8, bool) {
 
 
 // Uint16ToUint8 converts an uint16 value to uint8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint16ToUint8(x uint16) (uint8, bool) {
         y := uint8(x)
         if x <= math.MaxUint8 {
@@ -885,7 +885,7 @@ func Uint16ToUint8(x uint16) (uint8, bool) {
 
 
 // Uint64ToInt64 converts an uint64 value to int64.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint64ToInt64(x uint64) (int64, bool) {
         y := int64(x)
         if x <= math.MaxInt64 {
@@ -898,7 +898,7 @@ func Uint64ToInt64(x uint64) (int64, bool) {
 
 
 // Uint64ToInt32 converts an uint64 value to int32.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint64ToInt32(x uint64) (int32, bool) {
         y := int32(x)
         if x <= math.MaxInt32 {
@@ -911,7 +911,7 @@ func Uint64ToInt32(x uint64) (int32, bool) {
 
 
 // Uint64ToInt16 converts an uint64 value to int16.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint64ToInt16(x uint64) (int16, bool) {
         y := int16(x)
         if x <= math.MaxInt16 {
@@ -924,7 +924,7 @@ func Uint64ToInt16(x uint64) (int16, bool) {
 
 
 // Uint64ToInt8 converts an uint64 value to int8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint64ToInt8(x uint64) (int8, bool) {
         y := int8(x)
         if x <= math.MaxInt8 {
@@ -937,7 +937,7 @@ func Uint64ToInt8(x uint64) (int8, bool) {
 
 
 // Uint32ToInt32 converts an uint32 value to int32.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint32ToInt32(x uint32) (int32, bool) {
         y := int32(x)
         if x <= math.MaxInt32 {
@@ -950,7 +950,7 @@ func Uint32ToInt32(x uint32) (int32, bool) {
 
 
 // Uint32ToInt16 converts an uint32 value to int16.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint32ToInt16(x uint32) (int16, bool) {
         y := int16(x)
         if x <= math.MaxInt16 {
@@ -963,7 +963,7 @@ func Uint32ToInt16(x uint32) (int16, bool) {
 
 
 // Uint32ToInt8 converts an uint32 value to int8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint32ToInt8(x uint32) (int8, bool) {
         y := int8(x)
         if x <= math.MaxInt8 {
@@ -976,7 +976,7 @@ func Uint32ToInt8(x uint32) (int8, bool) {
 
 
 // Uint16ToInt16 converts an uint16 value to int16.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint16ToInt16(x uint16) (int16, bool) {
         y := int16(x)
         if x <= math.MaxInt16 {
@@ -989,7 +989,7 @@ func Uint16ToInt16(x uint16) (int16, bool) {
 
 
 // Uint16ToInt8 converts an uint16 value to int8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint16ToInt8(x uint16) (int8, bool) {
         y := int8(x)
         if x <= math.MaxInt8 {
@@ -1002,7 +1002,7 @@ func Uint16ToInt8(x uint16) (int8, bool) {
 
 
 // Uint8ToInt8 converts an uint8 value to int8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint8ToInt8(x uint8) (int8, bool) {
         y := int8(x)
         if x <= math.MaxInt8 {
@@ -1015,7 +1015,7 @@ func Uint8ToInt8(x uint8) (int8, bool) {
 
 
 // Int64ToUint64 converts an int64 value to uint64.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int64ToUint64(x int64) (uint64, bool) {
         y := uint64(x)
         if 0 <= x {
@@ -1028,7 +1028,7 @@ func Int64ToUint64(x int64) (uint64, bool) {
 
 
 // Int64ToUint32 converts an int64 value to uint32.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int64ToUint32(x int64) (uint32, bool) {
         y := uint32(x)
         if 0 <= x && x <= math.MaxUint32 {
@@ -1041,7 +1041,7 @@ func Int64ToUint32(x int64) (uint32, bool) {
 
 
 // Int64ToUint16 converts an int64 value to uint16.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int64ToUint16(x int64) (uint16, bool) {
         y := uint16(x)
         if 0 <= x && x <= math.MaxUint16 {
@@ -1054,7 +1054,7 @@ func Int64ToUint16(x int64) (uint16, bool) {
 
 
 // Int64ToUint8 converts an int64 value to uint8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int64ToUint8(x int64) (uint8, bool) {
         y := uint8(x)
         if 0 <= x && x <= math.MaxUint8 {
@@ -1067,7 +1067,7 @@ func Int64ToUint8(x int64) (uint8, bool) {
 
 
 // Int32ToUint64 converts an int32 value to uint64.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int32ToUint64(x int32) (uint64, bool) {
         y := uint64(x)
         if 0 <= x {
@@ -1080,7 +1080,7 @@ func Int32ToUint64(x int32) (uint64, bool) {
 
 
 // Int32ToUint32 converts an int32 value to uint32.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int32ToUint32(x int32) (uint32, bool) {
         y := uint32(x)
         if 0 <= x {
@@ -1093,7 +1093,7 @@ func Int32ToUint32(x int32) (uint32, bool) {
 
 
 // Int32ToUint16 converts an int32 value to uint16.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int32ToUint16(x int32) (uint16, bool) {
         y := uint16(x)
         if 0 <= x && x <= math.MaxUint16 {
@@ -1106,7 +1106,7 @@ func Int32ToUint16(x int32) (uint16, bool) {
 
 
 // Int32ToUint8 converts an int32 value to uint8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int32ToUint8(x int32) (uint8, bool) {
         y := uint8(x)
         if 0 <= x && x <= math.MaxUint8 {
@@ -1119,7 +1119,7 @@ func Int32ToUint8(x int32) (uint8, bool) {
 
 
 // Int16ToUint64 converts an int16 value to uint64.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int16ToUint64(x int16) (uint64, bool) {
         y := uint64(x)
         if 0 <= x {
@@ -1132,7 +1132,7 @@ func Int16ToUint64(x int16) (uint64, bool) {
 
 
 // Int16ToUint32 converts an int16 value to uint32.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int16ToUint32(x int16) (uint32, bool) {
         y := uint32(x)
         if 0 <= x {
@@ -1145,7 +1145,7 @@ func Int16ToUint32(x int16) (uint32, bool) {
 
 
 // Int16ToUint16 converts an int16 value to uint16.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int16ToUint16(x int16) (uint16, bool) {
         y := uint16(x)
         if 0 <= x {
@@ -1158,7 +1158,7 @@ func Int16ToUint16(x int16) (uint16, bool) {
 
 
 // Int16ToUint8 converts an int16 value to uint8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int16ToUint8(x int16) (uint8, bool) {
         y := uint8(x)
         if 0 <= x && x <= math.MaxUint8 {
@@ -1171,7 +1171,7 @@ func Int16ToUint8(x int16) (uint8, bool) {
 
 
 // Int8ToUint64 converts an int8 value to uint64.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int8ToUint64(x int8) (uint64, bool) {
         y := uint64(x)
         if 0 <= x {
@@ -1184,7 +1184,7 @@ func Int8ToUint64(x int8) (uint64, bool) {
 
 
 // Int8ToUint32 converts an int8 value to uint32.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int8ToUint32(x int8) (uint32, bool) {
         y := uint32(x)
         if 0 <= x {
@@ -1197,7 +1197,7 @@ func Int8ToUint32(x int8) (uint32, bool) {
 
 
 // Int8ToUint16 converts an int8 value to uint16.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int8ToUint16(x int8) (uint16, bool) {
         y := uint16(x)
         if 0 <= x {
@@ -1210,7 +1210,7 @@ func Int8ToUint16(x int8) (uint16, bool) {
 
 
 // Int8ToUint8 converts an int8 value to uint8.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int8ToUint8(x int8) (uint8, bool) {
         y := uint8(x)
         if 0 <= x {

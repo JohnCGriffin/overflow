@@ -42,7 +42,7 @@ So, FEEL FREE to carefully review the code visually.
 
 // Unspecified size, i.e. normal signed int
 
-// Add sums two ints, returning the result and a boolean status.
+// Add sums two ints, returning the result and a ok result indicating whether the operation is safe.
 func Add(a, b int) (int, bool) {
 	if _is64Bit() {
 		r64, ok := Add64(int64(a), int64(b))
@@ -52,7 +52,7 @@ func Add(a, b int) (int, bool) {
 	return int(r32), ok
 }
 
-// UAdd sums two uints, returning the result and a boolean status.
+// UAdd sums two uints, returning the result and a ok result indicating whether the operation is safe.
 func UAdd(a, b uint) (uint, bool) {
 	if _is64Bit() {
 		r64, ok := UAdd64(uint64(a), uint64(b))
@@ -62,7 +62,7 @@ func UAdd(a, b uint) (uint, bool) {
 	return uint(r32), ok
 }
 
-// Sub returns the difference of two ints and a boolean status.
+// Sub returns the difference of two ints and a ok result indicating whether the operation is safe.
 func Sub(a, b int) (int, bool) {
 	if _is64Bit() {
 		r64, ok := Sub64(int64(a), int64(b))
@@ -72,7 +72,7 @@ func Sub(a, b int) (int, bool) {
 	return int(r32), ok
 }
 
-// USub returns the difference of two uints and a boolean status.
+// USub returns the difference of two uints and a ok result indicating whether the operation is safe.
 func USub(a, b uint) (uint, bool) {
 	if _is64Bit() {
 		r64, ok := USub64(uint64(a), uint64(b))
@@ -82,7 +82,7 @@ func USub(a, b uint) (uint, bool) {
 	return uint(r32), ok
 }
 
-// Mul returns the product of two ints and a boolean status.
+// Mul returns the product of two ints and a ok result indicating whether the operation is safe.
 func Mul(a, b int) (int, bool) {
 	if _is64Bit() {
 		r64, ok := Mul64(int64(a), int64(b))
@@ -92,7 +92,7 @@ func Mul(a, b int) (int, bool) {
 	return int(r32), ok
 }
 
-// UMul returns the product of two uints and a boolean status.
+// UMul returns the product of two uints and a ok result indicating whether the operation is safe.
 func UMul(a, b uint) (uint, bool) {
 	if _is64Bit() {
 		r64, ok := UMul64(uint64(a), uint64(b))
@@ -102,7 +102,7 @@ func UMul(a, b uint) (uint, bool) {
 	return uint(r32), ok
 }
 
-// Div returns the quotient of two ints and a boolean status
+// Div returns the quotient of two ints and a ok result indicating whether the operation is safe.
 func Div(a, b int) (int, bool) {
 	if _is64Bit() {
 		r64, ok := Div64(int64(a), int64(b))
@@ -112,7 +112,7 @@ func Div(a, b int) (int, bool) {
 	return int(r32), ok
 }
 
-// UDiv returns the quotient of two uints and a boolean status
+// UDiv returns the quotient of two uints and a ok result indicating whether the operation is safe.
 func UDiv(a, b uint) (uint, bool) {
 	if _is64Bit() {
 		r64, ok := UDiv64(uint64(a), uint64(b))
@@ -122,7 +122,7 @@ func UDiv(a, b uint) (uint, bool) {
 	return uint(r32), ok
 }
 
-// Quotient returns the quotient, remainder and status of two ints
+// Quotient returns the quotient, remainder and ok result indicating whether the operation is safe.
 func Quotient(a, b int) (int, int, bool) {
 	if _is64Bit() {
 		q64, r64, ok := Quotient64(int64(a), int64(b))
@@ -132,7 +132,7 @@ func Quotient(a, b int) (int, int, bool) {
 	return int(q32), int(r32), ok
 }
 
-// UQuotient returns the quotient, remainder and status of two uints
+// UQuotient returns the quotient, remainder and ok result indicating whether the operation is safe.
 func UQuotient(a, b uint) (uint, uint, bool) {
 	if _is64Bit() {
 		uq64, ur64, ok := UQuotient64(uint64(a), uint64(b))

@@ -17,7 +17,7 @@ do
 echo "
 
 // Add${SIZE} performs + operation on two int${SIZE} operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Add${SIZE}(a, b int${SIZE}) (int${SIZE}, bool) {
         c := a + b
         if (c > a) == (b > 0) {
@@ -36,7 +36,7 @@ func Add${SIZE}p(a, b int${SIZE}) int${SIZE} {
 }
 
 // UAdd${SIZE} performs + operation on two uint${SIZE} operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UAdd${SIZE}(a, b uint${SIZE}) (uint${SIZE}, bool) {
         c := a + b
         if c >= a {
@@ -56,7 +56,7 @@ func UAdd${SIZE}p(a, b uint${SIZE}) uint${SIZE} {
 
 
 // Sub${SIZE} performs - operation on two int${SIZE} operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Sub${SIZE}(a, b int${SIZE}) (int${SIZE}, bool) {
         c := a - b
         if (c < a) == (b > 0) {
@@ -75,7 +75,7 @@ func Sub${SIZE}p(a, b int${SIZE}) int${SIZE} {
 }
 
 // USub${SIZE} performs - operation on two uint${SIZE} operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func USub${SIZE}(a, b uint${SIZE}) (uint${SIZE}, bool) {
         c := a - b
         if a >= b {
@@ -95,7 +95,7 @@ func USub${SIZE}p(a, b uint${SIZE}) uint${SIZE} {
 
 
 // Mul${SIZE} performs * operation on two int${SIZE} operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Mul${SIZE}(a, b int${SIZE}) (int${SIZE}, bool) {
         if a == 0 || b == 0 {
                 return 0, true
@@ -119,7 +119,7 @@ func Mul${SIZE}p(a, b int${SIZE}) int${SIZE} {
 }
 
 // UMul${SIZE} performs * operation on two uint${SIZE} operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UMul${SIZE}(a, b uint${SIZE}) (uint${SIZE}, bool) {
         if a == 0 || b == 0 {
                 return 0, true
@@ -142,7 +142,7 @@ func UMul${SIZE}p(a, b uint${SIZE}) uint${SIZE} {
 
 
 // Div${SIZE} performs / operation on two int${SIZE} operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func Div${SIZE}(a, b int${SIZE}) (int${SIZE}, bool) {
         q, _, ok := Quotient${SIZE}(a, b)
         return q, ok
@@ -158,7 +158,7 @@ func Div${SIZE}p(a, b int${SIZE}) int${SIZE} {
 }
 
 // Quotient${SIZE} performs + operation on two int${SIZE} operands
-// returning a quotient, a remainder and status
+// returning a quotient, a remainder and a ok result indicating whether the operation is safe.
 func Quotient${SIZE}(a, b int${SIZE}) (int${SIZE}, int${SIZE}, bool) {
         if b == 0 {
                 return 0, 0, false
@@ -169,7 +169,7 @@ func Quotient${SIZE}(a, b int${SIZE}) (int${SIZE}, int${SIZE}, bool) {
 }
 
 // UDiv${SIZE} performs / operation on two uint${SIZE} operands
-// returning a result and status
+// returning a result and a ok result indicating whether the operation is safe.
 func UDiv${SIZE}(a, b uint${SIZE}) (uint${SIZE}, bool) {
         q, _, ok := UQuotient${SIZE}(a, b)
         return q, ok
@@ -185,7 +185,7 @@ func UDiv${SIZE}p(a, b uint${SIZE}) uint${SIZE} {
 }
 
 // UQuotient${SIZE} performs + operation on two uint${SIZE} operands
-// returning a quotient, a remainder and status
+// returning a quotient, a remainder and a ok result indicating whether the operation is safe.
 func UQuotient${SIZE}(a, b uint${SIZE}) (uint${SIZE}, uint${SIZE}, bool) {
         if b == 0 {
                 return 0, 0, false
@@ -204,7 +204,7 @@ for TO in $(seq $((FROM + 1)) 3); do
 echo "
 
 // Int${SIZE[FROM]}ToInt${SIZE[TO]} converts an int${SIZE[FROM]} value to int${SIZE[TO]}.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int${SIZE[FROM]}ToInt${SIZE[TO]}(x int${SIZE[FROM]}) (int${SIZE[TO]}, bool) {
         y := int${SIZE[TO]}(x)
         if math.MinInt${SIZE[TO]} <= x && x <= math.MaxInt${SIZE[TO]} {
@@ -223,7 +223,7 @@ for TO in $(seq $((FROM + 1)) 3); do
 echo "
 
 // Uint${SIZE[FROM]}ToUint${SIZE[TO]} converts an uint${SIZE[FROM]} value to uint${SIZE[TO]}.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint${SIZE[FROM]}ToUint${SIZE[TO]}(x uint${SIZE[FROM]}) (uint${SIZE[TO]}, bool) {
         y := uint${SIZE[TO]}(x)
         if x <= math.MaxUint${SIZE[TO]} {
@@ -242,7 +242,7 @@ for TO in $(seq $((FROM)) 3); do
 echo "
 
 // Uint${SIZE[FROM]}ToInt${SIZE[TO]} converts an uint${SIZE[FROM]} value to int${SIZE[TO]}.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Uint${SIZE[FROM]}ToInt${SIZE[TO]}(x uint${SIZE[FROM]}) (int${SIZE[TO]}, bool) {
         y := int${SIZE[TO]}(x)
         if x <= math.MaxInt${SIZE[TO]} {
@@ -262,7 +262,7 @@ for TO in {0..3}; do
 echo "
 
 // Int${SIZE[FROM]}ToUint${SIZE[TO]} converts an int${SIZE[FROM]} value to uint${SIZE[TO]}.
-// returning a converted value and a bool value indicating whether the operation is safe.
+// returning a converted value and a ok result indicating whether the operation is safe.
 func Int${SIZE[FROM]}ToUint${SIZE[TO]}(x int${SIZE[FROM]}) (uint${SIZE[TO]}, bool) {
         y := uint${SIZE[TO]}(x)"
     if [ "$((SIZE[FROM]))" -gt "$((SIZE[TO]))" ]; then

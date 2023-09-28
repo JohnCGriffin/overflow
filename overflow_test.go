@@ -189,6 +189,9 @@ func TestQuotient(t *testing.T) {
 	if _, _, ok = Quotient(1, 0); ok {
 		t.Error("unexpected lack of failure")
 	}
+	if _, _, ok = Quotient(math.MinInt, -1); ok {
+		t.Error("unexpected lack of failure")
+	}
 	uq, ur, ok := UQuotient(100, 3)
 	if ur != 1 || uq != 33 || !ok {
 		t.Errorf("expected 100/3 => 33, r=1")
