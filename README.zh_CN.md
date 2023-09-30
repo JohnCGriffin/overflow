@@ -82,9 +82,41 @@ func main() {
 ```
 提供UintToInt、IntToUint、Uint64ToInt32、Int32ToUint64等操作。
 
+#### 取绝对值
+```go
+func main() {
+    normalAbs := func(x int64) int64 {
+        if x < 0 {
+            x = -x
+        }
+        return x
+    }
+    var i1, j1, k1 int64 = -9007199254740993, -9007199254740993, -9007199254740993
+    fmt.Println(int64(math.Abs(float64(i1))))
+    fmt.Println(normalAbs(j1))
+    fmt.Println(overflow.Abs64(k1))
+
+    var i2, j2, k2 int64 = math.MinInt64, math.MinInt64, math.MinInt64
+    fmt.Println(int64(math.Abs(float64(i2))))
+    fmt.Println(normalAbs(j2))
+    fmt.Println(overflow.Abs64(k2))
+}
+```
+yields the output
+```go
+9007199254740992 // Mantissa overflow, precision lost
+9007199254740993
+9007199254740993 true
+-9223372036854775808
+-9223372036854775808
+-9223372036854775808 false // Overflow detected
+```
+
+对于整数，提供包含溢出检测的取绝对值操作。
+
 ### 保持冷静并恐慌
 
-有充分的证据表明，恐慌是一种不惯用但正确的反应。 如果你相信在算术和转换出现问题后，没有有效的方法可以继续你的程序，你可以使用更简单的 Addp、Mulp、Subp 、Divp、UintToIntp、IntToUintp 版本，它们返回正常结果或恐慌。
+有充分的证据表明，恐慌是一种不惯用但正确的反应。 如果你相信在算术和转换出现问题后，没有有效的方法可以继续你的程序，你可以使用更简单的 Addp、Mulp、Subp 、Divp、UintToIntp、Absp等版本，它们返回正常结果或恐慌。
 
 ### 性能考虑
 

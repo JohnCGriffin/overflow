@@ -8,6 +8,18 @@ import "math"
 
 
 
+// Abs8 performs absolute value operation on an int8 operand
+// returning a result and a ok result indicating whether the operation is safe.
+func Abs8(x int8) (int8, bool) {
+        if x == math.MinInt8 {
+                return x, false
+        }
+        if x >= 0 {
+                return x, true
+        }
+        return -x, true
+}
+
 // Add8 performs + operation on two int8 operands
 // returning a result and a ok result indicating whether the operation is safe.
 func Add8(a, b int8) (int8, bool) {
@@ -187,6 +199,18 @@ func UQuotient8(a, b uint8) (uint8, uint8, bool) {
 }
 
 
+
+// Abs16 performs absolute value operation on an int16 operand
+// returning a result and a ok result indicating whether the operation is safe.
+func Abs16(x int16) (int16, bool) {
+        if x == math.MinInt16 {
+                return x, false
+        }
+        if x >= 0 {
+                return x, true
+        }
+        return -x, true
+}
 
 // Add16 performs + operation on two int16 operands
 // returning a result and a ok result indicating whether the operation is safe.
@@ -368,6 +392,18 @@ func UQuotient16(a, b uint16) (uint16, uint16, bool) {
 
 
 
+// Abs32 performs absolute value operation on an int32 operand
+// returning a result and a ok result indicating whether the operation is safe.
+func Abs32(x int32) (int32, bool) {
+        if x == math.MinInt32 {
+                return x, false
+        }
+        if x >= 0 {
+                return x, true
+        }
+        return -x, true
+}
+
 // Add32 performs + operation on two int32 operands
 // returning a result and a ok result indicating whether the operation is safe.
 func Add32(a, b int32) (int32, bool) {
@@ -547,6 +583,18 @@ func UQuotient32(a, b uint32) (uint32, uint32, bool) {
 }
 
 
+
+// Abs64 performs absolute value operation on an int64 operand
+// returning a result and a ok result indicating whether the operation is safe.
+func Abs64(x int64) (int64, bool) {
+        if x == math.MinInt64 {
+                return x, false
+        }
+        if x >= 0 {
+                return x, true
+        }
+        return -x, true
+}
 
 // Add64 performs + operation on two int64 operands
 // returning a result and a ok result indicating whether the operation is safe.

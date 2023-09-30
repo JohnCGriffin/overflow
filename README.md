@@ -26,19 +26,14 @@ go generate
 
 #### Arithmetic overflow detection
 ```go
-package main
-
-import "fmt"
-import "math"
 import "github.com/rwxe/overflow"
 
 func main() {
-	addend := math.MaxInt64 - 5
-	for i := 0; i < 10; i++ {
-		sum, ok := overflow.Add(addend, i)
-		fmt.Printf("%v+%v -> (%v,%v)\n",
-			addend, i, sum, ok)
-	}
+    addend := math.MaxInt64 - 5
+    for i := 0; i < 10; i++ {
+        sum, ok := overflow.Add(addend, i)
+        fmt.Printf("%v+%v -> (%v,%v)\n", addend, i, sum, ok)
+    }
 }
 ```
 yields the output
@@ -56,16 +51,14 @@ yields the output
 ```
 For (u)int types, provide (U)Add, (U)Sub, (U)Mul, (U)Div, (U)Quotient, etc.
 
-
 #### Type conversion overflow detection
 ```go
 func main() {
-	var i uint
-	for i = math.MaxInt - 5; i <= math.MaxInt+5; i++ {
-		ret, ok := overflow.UintToInt(i)
-		fmt.Printf("%v -> (%v,%v)\n",
-			i, ret, ok)
-	}
+    var i uint
+    for i = math.MaxInt - 5; i <= math.MaxInt+5; i++ {
+        ret, ok := overflow.UintToInt(i)
+        fmt.Printf("%v -> (%v,%v)\n", i, ret, ok)
+    }
 }
 ```
 yields the output
@@ -84,9 +77,41 @@ yields the output
 ```
 Provide UintToInt, IntToUint, Uint64ToInt32, Int32ToUint64, etc.
 
+#### Get absolute value
+```go
+func main() {
+    normalAbs := func(x int64) int64 {
+        if x < 0 {
+            x = -x
+        }
+        return x
+    }
+    var i1, j1, k1 int64 = -9007199254740993, -9007199254740993, -9007199254740993
+    fmt.Println(int64(math.Abs(float64(i1))))
+    fmt.Println(normalAbs(j1))
+    fmt.Println(overflow.Abs64(k1))
+
+    var i2, j2, k2 int64 = math.MinInt64, math.MinInt64, math.MinInt64
+    fmt.Println(int64(math.Abs(float64(i2))))
+    fmt.Println(normalAbs(j2))
+    fmt.Println(overflow.Abs64(k2))
+}
+```
+yields the output
+```go
+9007199254740992 // Mantissa overflow, precision lost
+9007199254740993
+9007199254740993 true
+-9223372036854775808
+-9223372036854775808
+-9223372036854775808 false // Overflow detected
+```
+
+For int, provides an absolute value including overflow detection.
+
 ### Stay calm and panic
 
-There's a good case to be made that a panic is an unidiomatic but proper response.  Iff you believe that there's no valid way to continue your program after math goes wayward, you can use the easier Addp, Mulp, Subp, Divp, IntToUintp, UintToIntp versions which return the normal result or panic.
+There's a good case to be made that a panic is an unidiomatic but proper response. If you believe that there's no valid way to continue your program after math goes wayward, you can use the easier Addp, Mulp, Subp, Divp, IntToUintp, Absp etc, which return the normal result or panic.
 
 ### Performance considerations
 

@@ -16,6 +16,18 @@ for SIZE in 8 16 32 64
 do
 echo "
 
+// Abs${SIZE} performs absolute value operation on an int${SIZE} operand
+// returning a result and a ok result indicating whether the operation is safe.
+func Abs${SIZE}(x int${SIZE}) (int${SIZE}, bool) {
+        if x == math.MinInt${SIZE} {
+                return x, false
+        }
+        if x >= 0 {
+                return x, true
+        }
+        return -x, true
+}
+
 // Add${SIZE} performs + operation on two int${SIZE} operands
 // returning a result and a ok result indicating whether the operation is safe.
 func Add${SIZE}(a, b int${SIZE}) (int${SIZE}, bool) {

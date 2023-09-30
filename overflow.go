@@ -42,6 +42,16 @@ So, FEEL FREE to carefully review the code visually.
 
 // Unspecified size, i.e. normal signed int
 
+// Abs get absolute value of an int, returning the result and a ok result indicating whether the operation is safe.
+func Abs(x int) (int, bool) {
+	if _is64Bit() {
+		r64, ok := Abs64(int64(x))
+		return int(r64), ok
+	}
+	r32, ok := Abs32(int32(x))
+	return int(r32), ok
+}
+
 // Add sums two ints, returning the result and a ok result indicating whether the operation is safe.
 func Add(a, b int) (int, bool) {
 	if _is64Bit() {
@@ -165,6 +175,15 @@ func UintToInt(x uint) (int, bool) {
 }
 
 /************* Panic versions for int ****************/
+
+// Absp returns the absolute value, panicking on overflow
+func Absp(x int) int {
+	r, ok := Abs(x)
+	if !ok {
+		panic("absolute value overflow")
+	}
+	return r
+}
 
 // Addp returns the sum of two ints, panicking on overflow
 func Addp(a, b int) int {

@@ -1,7 +1,7 @@
 package overflow
 
 import (
-	"testing"
+        "testing"
 )
 
 /*
@@ -38,89 +38,89 @@ done
 
 // Integer limit values.
 const (
-	intSize = 32 << (^uint(0) >> 63) // 32 or 64
+        intSize = 32 << (^uint(0) >> 63) // 32 or 64
 
-	MaxInt    = 1<<(intSize-1) - 1  // MaxInt32 or MaxInt64 depending on intSize.
-	MinInt    = -1 << (intSize - 1) // MinInt32 or MinInt64 depending on intSize.
-	MaxInt8   = 1<<7 - 1            // 127
-	MinInt8   = -1 << 7             // -128
-	MaxInt16  = 1<<15 - 1           // 32767
-	MinInt16  = -1 << 15            // -32768
-	MaxInt32  = 1<<31 - 1           // 2147483647
-	MinInt32  = -1 << 31            // -2147483648
-	MaxInt64  = 1<<63 - 1           // 9223372036854775807
-	MinInt64  = -1 << 63            // -9223372036854775808
-	MaxUint   = 1<<intSize - 1      // MaxUint32 or MaxUint64 depending on intSize.
-	MinUint   = 0
-	MaxUint8  = 1<<8 - 1 // 255
-	MinUint8  = 0
-	MaxUint16 = 1<<16 - 1 // 65535
-	MinUint16 = 0
-	MaxUint32 = 1<<32 - 1 // 4294967295
-	MinUint32 = 0
-	MaxUint64 = 1<<64 - 1 // 18446744073709551615
-	MinUint64 = 0
+        MaxInt    = 1<<(intSize-1) - 1  // MaxInt32 or MaxInt64 depending on intSize.
+        MinInt    = -1 << (intSize - 1) // MinInt32 or MinInt64 depending on intSize.
+        MaxInt8   = 1<<7 - 1            // 127
+        MinInt8   = -1 << 7             // -128
+        MaxInt16  = 1<<15 - 1           // 32767
+        MinInt16  = -1 << 15            // -32768
+        MaxInt32  = 1<<31 - 1           // 2147483647
+        MinInt32  = -1 << 31            // -2147483648
+        MaxInt64  = 1<<63 - 1           // 9223372036854775807
+        MinInt64  = -1 << 63            // -9223372036854775808
+        MaxUint   = 1<<intSize - 1      // MaxUint32 or MaxUint64 depending on intSize.
+        MinUint   = 0
+        MaxUint8  = 1<<8 - 1 // 255
+        MinUint8  = 0
+        MaxUint16 = 1<<16 - 1 // 65535
+        MinUint16 = 0
+        MaxUint32 = 1<<32 - 1 // 4294967295
+        MinUint32 = 0
+        MaxUint64 = 1<<64 - 1 // 18446744073709551615
+        MinUint64 = 0
 )
 
 func TestTypeConversion(t *testing.T) {
-	UNEXPECTED_OK := "Unexpected OK, func returned:"
+        UnexpectedOk := "Unexpected OK, func returned:"
 
         //if r,ok:=IntToUint(MaxInt);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=IntToUint(MinInt);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=IntToUint(MinUint-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=IntToUint(MinInt);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=IntToUint(MinUint-1);ok{t.Error(UnexpectedOk,r)}
 
-        if r,ok:=UintToInt(MaxUint);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=UintToInt(MaxUint);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=UintToInt(MinUint);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=UintToInt(MaxInt+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=UintToInt(MaxInt+1);ok{t.Error(UnexpectedOk,r)}
         // Int64 -> Int64
 
 
         // Int64 -> Int32
-        if r,ok:=Int64ToInt32(MaxInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToInt32(MinInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToInt32(MaxInt32+1);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToInt32(MinInt32-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int64ToInt32(MaxInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToInt32(MinInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToInt32(MaxInt32+1);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToInt32(MinInt32-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int64 -> Int16
-        if r,ok:=Int64ToInt16(MaxInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToInt16(MinInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToInt16(MaxInt16+1);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToInt16(MinInt16-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int64ToInt16(MaxInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToInt16(MinInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToInt16(MaxInt16+1);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToInt16(MinInt16-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int64 -> Int8
-        if r,ok:=Int64ToInt8(MaxInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToInt8(MinInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToInt8(MaxInt8+1);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToInt8(MinInt8-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int64ToInt8(MaxInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToInt8(MinInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToInt8(MaxInt8+1);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToInt8(MinInt8-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int64 -> Uint64
         //if r,ok:=Int64ToUint64(MaxInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToUint64(MinInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToUint64(MinUint64-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int64ToUint64(MinInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToUint64(MinUint64-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int64 -> Uint32
-        if r,ok:=Int64ToUint32(MaxInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToUint32(MinInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToUint32(MaxUint32+1);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToUint32(MinUint32-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int64ToUint32(MaxInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToUint32(MinInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToUint32(MaxUint32+1);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToUint32(MinUint32-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int64 -> Uint16
-        if r,ok:=Int64ToUint16(MaxInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToUint16(MinInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToUint16(MaxUint16+1);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToUint16(MinUint16-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int64ToUint16(MaxInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToUint16(MinInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToUint16(MaxUint16+1);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToUint16(MinUint16-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int64 -> Uint8
-        if r,ok:=Int64ToUint8(MaxInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToUint8(MinInt64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToUint8(MaxUint8+1);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int64ToUint8(MinUint8-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int64ToUint8(MaxInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToUint8(MinInt64);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToUint8(MaxUint8+1);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int64ToUint8(MinUint8-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int32 -> Int64
@@ -130,43 +130,43 @@ func TestTypeConversion(t *testing.T) {
 
 
         // Int32 -> Int16
-        if r,ok:=Int32ToInt16(MaxInt32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToInt16(MinInt32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToInt16(MaxInt16+1);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToInt16(MinInt16-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int32ToInt16(MaxInt32);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToInt16(MinInt32);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToInt16(MaxInt16+1);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToInt16(MinInt16-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int32 -> Int8
-        if r,ok:=Int32ToInt8(MaxInt32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToInt8(MinInt32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToInt8(MaxInt8+1);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToInt8(MinInt8-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int32ToInt8(MaxInt32);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToInt8(MinInt32);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToInt8(MaxInt8+1);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToInt8(MinInt8-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int32 -> Uint64
         //if r,ok:=Int32ToUint64(MaxInt32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToUint64(MinInt32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToUint64(MinUint64-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int32ToUint64(MinInt32);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToUint64(MinUint64-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int32 -> Uint32
         //if r,ok:=Int32ToUint32(MaxInt32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToUint32(MinInt32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToUint32(MinUint32-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int32ToUint32(MinInt32);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToUint32(MinUint32-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int32 -> Uint16
-        if r,ok:=Int32ToUint16(MaxInt32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToUint16(MinInt32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToUint16(MaxUint16+1);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToUint16(MinUint16-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int32ToUint16(MaxInt32);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToUint16(MinInt32);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToUint16(MaxUint16+1);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToUint16(MinUint16-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int32 -> Uint8
-        if r,ok:=Int32ToUint8(MaxInt32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToUint8(MinInt32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToUint8(MaxUint8+1);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int32ToUint8(MinUint8-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int32ToUint8(MaxInt32);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToUint8(MinInt32);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToUint8(MaxUint8+1);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int32ToUint8(MinUint8-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int16 -> Int64
@@ -179,35 +179,35 @@ func TestTypeConversion(t *testing.T) {
 
 
         // Int16 -> Int8
-        if r,ok:=Int16ToInt8(MaxInt16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int16ToInt8(MinInt16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int16ToInt8(MaxInt8+1);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int16ToInt8(MinInt8-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int16ToInt8(MaxInt16);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int16ToInt8(MinInt16);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int16ToInt8(MaxInt8+1);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int16ToInt8(MinInt8-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int16 -> Uint64
         //if r,ok:=Int16ToUint64(MaxInt16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int16ToUint64(MinInt16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int16ToUint64(MinUint64-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int16ToUint64(MinInt16);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int16ToUint64(MinUint64-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int16 -> Uint32
         //if r,ok:=Int16ToUint32(MaxInt16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int16ToUint32(MinInt16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int16ToUint32(MinUint32-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int16ToUint32(MinInt16);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int16ToUint32(MinUint32-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int16 -> Uint16
         //if r,ok:=Int16ToUint16(MaxInt16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int16ToUint16(MinInt16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int16ToUint16(MinUint16-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int16ToUint16(MinInt16);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int16ToUint16(MinUint16-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int16 -> Uint8
-        if r,ok:=Int16ToUint8(MaxInt16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int16ToUint8(MinInt16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int16ToUint8(MaxUint8+1);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int16ToUint8(MinUint8-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int16ToUint8(MaxInt16);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int16ToUint8(MinInt16);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int16ToUint8(MaxUint8+1);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int16ToUint8(MinUint8-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int8 -> Int64
@@ -224,92 +224,92 @@ func TestTypeConversion(t *testing.T) {
 
         // Int8 -> Uint64
         //if r,ok:=Int8ToUint64(MaxInt8);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int8ToUint64(MinInt8);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int8ToUint64(MinUint64-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int8ToUint64(MinInt8);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int8ToUint64(MinUint64-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int8 -> Uint32
         //if r,ok:=Int8ToUint32(MaxInt8);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int8ToUint32(MinInt8);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int8ToUint32(MinUint32-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int8ToUint32(MinInt8);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int8ToUint32(MinUint32-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int8 -> Uint16
         //if r,ok:=Int8ToUint16(MaxInt8);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int8ToUint16(MinInt8);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int8ToUint16(MinUint16-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int8ToUint16(MinInt8);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int8ToUint16(MinUint16-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Int8 -> Uint8
         //if r,ok:=Int8ToUint8(MaxInt8);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int8ToUint8(MinInt8);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Int8ToUint8(MinUint8-1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Int8ToUint8(MinInt8);ok{t.Error(UnexpectedOk,r)}
+        if r,ok:=Int8ToUint8(MinUint8-1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint64 -> Int64
-        if r,ok:=Uint64ToInt64(MaxUint64);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToInt64(MaxUint64);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint64ToInt64(MinUint64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint64ToInt64(MaxInt64+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToInt64(MaxInt64+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint64 -> Int32
-        if r,ok:=Uint64ToInt32(MaxUint64);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToInt32(MaxUint64);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint64ToInt32(MinUint64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint64ToInt32(MaxInt32+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToInt32(MaxInt32+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint64 -> Int16
-        if r,ok:=Uint64ToInt16(MaxUint64);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToInt16(MaxUint64);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint64ToInt16(MinUint64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint64ToInt16(MaxInt16+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToInt16(MaxInt16+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint64 -> Int8
-        if r,ok:=Uint64ToInt8(MaxUint64);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToInt8(MaxUint64);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint64ToInt8(MinUint64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint64ToInt8(MaxInt8+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToInt8(MaxInt8+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint64 -> Uint64
 
 
         // Uint64 -> Uint32
-        if r,ok:=Uint64ToUint32(MaxUint64);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToUint32(MaxUint64);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint64ToUint32(MinUint64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint64ToUint32(MaxUint32+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToUint32(MaxUint32+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint64 -> Uint16
-        if r,ok:=Uint64ToUint16(MaxUint64);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToUint16(MaxUint64);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint64ToUint16(MinUint64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint64ToUint16(MaxUint16+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToUint16(MaxUint16+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint64 -> Uint8
-        if r,ok:=Uint64ToUint8(MaxUint64);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToUint8(MaxUint64);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint64ToUint8(MinUint64);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint64ToUint8(MaxUint8+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint64ToUint8(MaxUint8+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint32 -> Int64
 
 
         // Uint32 -> Int32
-        if r,ok:=Uint32ToInt32(MaxUint32);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint32ToInt32(MaxUint32);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint32ToInt32(MinUint32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint32ToInt32(MaxInt32+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint32ToInt32(MaxInt32+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint32 -> Int16
-        if r,ok:=Uint32ToInt16(MaxUint32);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint32ToInt16(MaxUint32);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint32ToInt16(MinUint32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint32ToInt16(MaxInt16+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint32ToInt16(MaxInt16+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint32 -> Int8
-        if r,ok:=Uint32ToInt8(MaxUint32);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint32ToInt8(MaxUint32);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint32ToInt8(MinUint32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint32ToInt8(MaxInt8+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint32ToInt8(MaxInt8+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint32 -> Uint64
@@ -319,15 +319,15 @@ func TestTypeConversion(t *testing.T) {
 
 
         // Uint32 -> Uint16
-        if r,ok:=Uint32ToUint16(MaxUint32);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint32ToUint16(MaxUint32);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint32ToUint16(MinUint32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint32ToUint16(MaxUint16+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint32ToUint16(MaxUint16+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint32 -> Uint8
-        if r,ok:=Uint32ToUint8(MaxUint32);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint32ToUint8(MaxUint32);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint32ToUint8(MinUint32);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint32ToUint8(MaxUint8+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint32ToUint8(MaxUint8+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint16 -> Int64
@@ -337,15 +337,15 @@ func TestTypeConversion(t *testing.T) {
 
 
         // Uint16 -> Int16
-        if r,ok:=Uint16ToInt16(MaxUint16);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint16ToInt16(MaxUint16);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint16ToInt16(MinUint16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint16ToInt16(MaxInt16+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint16ToInt16(MaxInt16+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint16 -> Int8
-        if r,ok:=Uint16ToInt8(MaxUint16);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint16ToInt8(MaxUint16);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint16ToInt8(MinUint16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint16ToInt8(MaxInt8+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint16ToInt8(MaxInt8+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint16 -> Uint64
@@ -358,9 +358,9 @@ func TestTypeConversion(t *testing.T) {
 
 
         // Uint16 -> Uint8
-        if r,ok:=Uint16ToUint8(MaxUint16);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint16ToUint8(MaxUint16);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint16ToUint8(MinUint16);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint16ToUint8(MaxUint8+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint16ToUint8(MaxUint8+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint8 -> Int64
@@ -373,9 +373,9 @@ func TestTypeConversion(t *testing.T) {
 
 
         // Uint8 -> Int8
-        if r,ok:=Uint8ToInt8(MaxUint8);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint8ToInt8(MaxUint8);ok{t.Error(UnexpectedOk,r)}
         //if r,ok:=Uint8ToInt8(MinUint8);ok{t.Error(UNEXPECTED_OK,r)}
-        if r,ok:=Uint8ToInt8(MaxInt8+1);ok{t.Error(UNEXPECTED_OK,r)}
+        if r,ok:=Uint8ToInt8(MaxInt8+1);ok{t.Error(UnexpectedOk,r)}
 
 
         // Uint8 -> Uint64

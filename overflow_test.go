@@ -201,6 +201,24 @@ func TestQuotient(t *testing.T) {
 	}
 }
 
+func TestAbs(t *testing.T) {
+	if _, ok := Abs(math.MinInt); ok {
+		t.Error("unexpected ok, absolute value overflow")
+	}
+	if _, ok := Abs64(math.MinInt64); ok {
+		t.Error("unexpected ok, absolute value overflow")
+	}
+	if _, ok := Abs32(math.MinInt32); ok {
+		t.Error("unexpected ok, absolute value overflow")
+	}
+	if _, ok := Abs16(math.MinInt16); ok {
+		t.Error("unexpected ok, absolute value overflow")
+	}
+	if _, ok := Abs8(math.MinInt8); ok {
+		t.Error("unexpected ok, absolute value overflow")
+	}
+}
+
 //func TestAdditionInt(t *testing.T) {
 //	fmt.Printf("\nminint8 = %v\n", math.MinInt8)
 //	fmt.Printf("maxint8 = %v\n\n", math.MaxInt8)
